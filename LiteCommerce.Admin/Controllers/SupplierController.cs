@@ -1,6 +1,4 @@
-﻿using LiteCommerce.BusinessLayers;
-using LiteCommerce.DomainModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,10 +12,7 @@ namespace LiteCommerce.Admin.Controllers
         // GET: Supplier
         public ActionResult Index()
         {
-            int rowCount = 0;
-            List<Supplier> model = CatalogBLL.ListOfSuppliers(1, 10, "", out rowCount);
-            ViewBag.RowCount = rowCount;
-            return View(model);
+            return View();
         }
 
         public ActionResult Input(string id="")
