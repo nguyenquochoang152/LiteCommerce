@@ -6,9 +6,11 @@ using System.Web.Mvc;
 
 namespace LiteCommerce.Admin.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         // GET: Report
+       
         public ActionResult Index()
         {
             return View();

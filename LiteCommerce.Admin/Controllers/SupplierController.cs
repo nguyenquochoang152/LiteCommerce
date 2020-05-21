@@ -7,23 +7,23 @@ using System.Web.Mvc;
 namespace LiteCommerce.Admin.Controllers
 {
     [Authorize]
-    public class CustomerController : Controller
+    public class SupplierController : Controller
     {
-        // GET: Customer
-       
+        // GET: Supplier
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Input(string id = "")
+
+        public ActionResult Input(string id="")
         {
-            if (string.IsNullOrEmpty(id))
+            if(string.IsNullOrEmpty(id))
             {
-                ViewBag.Title = "Create new Customer";
+                ViewBag.Title = "Create new Supplier";
             }
             else
             {
-                ViewBag.Title = "Edit a Customer";
+                ViewBag.Title = "Edit a Supplier";
             }
             return View();
         }

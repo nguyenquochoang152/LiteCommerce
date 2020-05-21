@@ -6,11 +6,25 @@ using System.Web.Mvc;
 
 namespace LiteCommerce.Admin.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         // GET: Category
+       
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult Input(string id = "")
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                ViewBag.Title = "Create new Categorys";
+            }
+            else
+            {
+                ViewBag.Title = "Edit a Categorys";
+            }
             return View();
         }
     }
