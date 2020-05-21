@@ -146,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\BusinessLayerConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -7163,20 +7162,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LiteCommerce.BusinessLayers\LiteCommerce.BusinessLayers.csproj">
-      <Project>{c969cd7e-797b-4d56-87cd-2c6aff44c611}</Project>
-      <Name>LiteCommerce.BusinessLayers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LiteCommerce.DataLayers\LiteCommerce.DataLayers.csproj">
-      <Project>{d40cbf00-0b72-4a60-ae0a-010d619dfad6}</Project>
-      <Name>LiteCommerce.DataLayers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LiteCommerce.DomainModels\LiteCommerce.DomainModels.csproj">
-      <Project>{97da100c-b93b-48d0-91ec-348e03c663dc}</Project>
-      <Name>LiteCommerce.DomainModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

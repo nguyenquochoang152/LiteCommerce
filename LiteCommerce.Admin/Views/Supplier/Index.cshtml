@@ -1,9 +1,5 @@
-﻿@model IEnumerable<LiteCommerce.DomainModels.Supplier>
-
-
-@{
+﻿@{
     ViewBag.Title = "Manage Suppliers";
-    int i = 0;
 }
 <div class="box box-primary">
     <div class="box-body">
@@ -19,7 +15,7 @@
 </div>
 <div class="container-fluid row" style="margin-bottom:10px;">
     <div class="col-sm-8">
-        There are <b>@ViewBag.RowCount</b> Suppliers. Page 1/100
+        There are <b>1,000</b> Suppliers. Page 1/100
     </div>
     <div class="col-md-4 text-right">
         <div class="btn-group">
@@ -44,7 +40,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var supplier in Model)
+                @for (int i = 1; i <= 3; i++)
                 {
                     <tr>
                         <td>
@@ -53,23 +49,23 @@
                         <td>@i</td>
                         <td>
                             <span style="color:#0094ff; font-weight:bold; display:block">
-                                @supplier.CompanyName
+                                New Orleans Cajun Delights
                             </span>
                             <span style="color:#646464">
-                                @supplier.ContactTitle
+                                Order Administrator:
                             </span>
                             <span style="color:#646464;font-weight:bold">
-                                @supplier.ContactName
+                                Shelley Burke
                             </span>
                         </td>
                         <td>
-                            <span style="display:block">@supplier.Address</span>
+                            <span style="display:block">P.O. Box 78934</span>
                             <span>New Orleans - USA</span>
                         </td>
                         <td>
-                            <span style="display:block"><i class="fa fa-phone"></i> @supplier.Phone</span>
-                            <span style="display:block"><i class="fa fa-fax"></i> @supplier.Fax</span>
-                            <span style="display:block"><i class="fa fa-home"></i> @supplier.HomePage</span>
+                            <span style="display:block"><i class="fa fa-phone"></i> (100) 555-4822</span>
+                            <span style="display:block"><i class="fa fa-fax"></i> (100) 333-665411</span>
+                            <span style="display:block"><i class="fa fa-home"></i> https://neworleans.com</span>
                         </td>
                         <td class="text-right">
                             <a class="btn btn-sm btn-default" href="~/Supplier/Input/@i/">
