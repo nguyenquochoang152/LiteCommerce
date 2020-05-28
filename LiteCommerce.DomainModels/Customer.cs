@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace LiteCommerce.DomainModels
 {
-    /// <summary>
-    /// Nhà cung cấp
-    /// </summary>
-    public class SuppliSer
+    public class Customer
     {
-        public int SupplierID { get; set; }
+        public string CustomerID { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public string Address { get; set; }
@@ -19,7 +16,6 @@ namespace LiteCommerce.DomainModels
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Fax { get; set; }
-        public string HomePage { get; set; }
         public string ContactTitle { get; set; }
     }
 }

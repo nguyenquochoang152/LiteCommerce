@@ -19,7 +19,7 @@ namespace LiteCommerce.DataLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        List<Supplier> List(int page, int pageSize, string searchValue);
+        List<SuppliSer> List(int page, int pageSize, string searchValue);
         
     
         /// <summary>
@@ -33,20 +33,20 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <param name="supplierID"></param>
         /// <returns></returns>
-        Supplier Get(int supplierID);
+        SuppliSer Get(int supplierID);
         /// <summary>
         /// Bổ sung 1 supplier , hàm trả về ID của supplier được bổ sung
         /// nếu lỗi m hàm trả về giá trị nhỏ hơn hoặc bằng 0
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        int Add(Supplier data);
+        int Add(SuppliSer data);
         /// <summary>
         /// Sửa 1 supplier
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        bool Update(Supplier date);
+        bool Update(SuppliSer date);
         /// <summary>
         /// Xóa nhiếu supplier 
         /// </summary>
