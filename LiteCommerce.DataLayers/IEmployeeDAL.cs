@@ -13,7 +13,8 @@ namespace LiteCommerce.DataLayers
         int Count(string searchValue);
         Employee Get(int EmployeeID);
         int Add(Employee data);
-        bool Update(Employee date);
+        bool Update(Employee data);
         int Detele(int[] employeeIDs);
+        bool ChangePassword(int id, string password, string nPassword, string nlPassword);
     }
 }

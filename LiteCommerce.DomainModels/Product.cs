@@ -13,7 +13,7 @@ namespace LiteCommerce.DomainModels
         public int SupplierID { get; set; }
         public int CategoryID { get; set; }
         public string QuantityPerUnit { get; set; }
-        public string UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
         public string Descriptions { get; set; }
         public string PhotoPath { get; set; }
     }

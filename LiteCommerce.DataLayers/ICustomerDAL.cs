@@ -11,9 +11,9 @@ namespace LiteCommerce.DataLayers
     {
         List<Customer> List(int page, int pageSize, string searchValue);
         int Count(string searchValue);
-        Customer Get(int CustomerID);
+        Customer Get(string CustomerID);
         int Add(Customer data);
-        bool Update(Customer date);
-        int Detele(int[] customerIDs);
+        bool Update(Customer data);
+        int Detele(string[] customerIDs);
     }
 }

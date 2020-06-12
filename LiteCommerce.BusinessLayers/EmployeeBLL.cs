@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LiteCommerce.BusinessLayers
 {
-    public class EmployeeBLL
+    public static class EmployeeBLL
     {
         /// <summary>
         ///  Hàm phải được gọi để khởi tạo chức năng tác nghiệp
@@ -17,17 +17,17 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="connectionString"></param>
         public static void Initialize(string connectionString)
         {
-            EmloyeeDB = new EmployeeDAL(connectionString);
+            EmployeeDB = new EmployeeDAL(connectionString);
         }
         #region Khai báo các thuộc tính giao tiếp với DAL
 
-        private static IEmployeeDAL EmloyeeDB { get; set; }
+        private static IEmployeeDAL EmployeeDB { get; set; }
 
         #endregion
 
         #region Khai báo các chức năng xử lý nghiệp vụ
         /// <summary>
-        /// Hiển thị danh sách của suppliers
+        /// Hiển thị danh sách của emloyee
         /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
@@ -40,8 +40,49 @@ namespace LiteCommerce.BusinessLayers
                 page = 1;
             if (pageSize < 0)
                 pageSize = 20;
-            rowCount = EmloyeeDB.Count(searchValue);
-            return EmloyeeDB.List(page, pageSize, searchValue);
+            rowCount = EmployeeDB.Count(searchValue);
+            return EmployeeDB.List(page, pageSize, searchValue);
+        }
+
+        /// <summary>
+        /// Lấy 1 Employee 
+        /// </summary>
+        /// <param name="EmployeeID"></param>
+        /// <returns></returns>
+        public static Employee GetEmployee(int EmployeeID)
+        {
+            return EmployeeDB.Get(EmployeeID);
+        }
+        /// <summary>
+        /// thêm 1 Employee
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int AddEmployee(Employee data)
+        {
+            return EmployeeDB.Add(data);
+        }
+        /// <summary>
+        /// xóa 1 danh sách Employee
+        /// </summary>
+        /// <param name="EmployeeIDs"></param>
+        /// <returns></returns>
+        public static int DeleteEmployees(int[] EmployeeIDs)
+        {
+            return EmployeeDB.Detele(EmployeeIDs);
+        }
+        /// <summary>
+        /// update 1 Employee
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool UpdateEmployee(Employee data)
+        {
+            return EmployeeDB.Update(data);
+        }
+        public static bool ChangePassword(int id, string password, string nPassword, string nlPassword)
+        {
+            return EmployeeDB.ChangePassword(id, password, nPassword, nlPassword);
         }
         #endregion
     }

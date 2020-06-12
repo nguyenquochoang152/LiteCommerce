@@ -17,94 +17,96 @@
         </form>
     </div>
 </div>
-<div class="container-fluid row" style="margin-bottom:10px;">
-    <div class="col-sm-8">
-        There are <b>@Model.RowCount</b> Categorys. @string.Format("{0}/{1}", Model.Page, Model.PageCount)
-    </div>
-    <div class="col-md-4 text-right">
-        <div class="btn-group">
-            <a href="~/Category/Input" class="btn btn-sm btn-primary">Add Category</a>
-            <button type="button" class="btn btn-sm btn-danger">Delete Categorys</button>
+<form action="~/Category/Delete" method="post">
+    <div class="container-fluid row" style="margin-bottom:10px;">
+        <div class="col-sm-8">
+            There are <b>@Model.RowCount</b> Categorys. @string.Format("{0}/{1}", Model.Page, Model.PageCount)
+        </div>
+        <div class="col-md-4 text-right">
+            <div class="btn-group">
+                <a href="~/Category/Input" class="btn btn-sm btn-primary">Add Category</a>
+                <button type="submit" class="btn btn-sm btn-danger">Delete Categorys</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="box box-success">
-    <div class="box-body">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th style="width:30px">
-                        <input type="checkbox" />
-                    </th>
-                    <th style="width:50px">#</th>
-                    <th style="width:auto">Name</th>
-                    <th style="width:200px">Description</th>
-                    <th style="width:50px"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var category in Model.Data)
-                {
+    <div class="box box-success">
+        <div class="box-body">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td>
+                        <th style="width:30px">
                             <input type="checkbox" />
-                        </td>
-                        <td>@(++i)</td>
-                        <td>
-                            <span style="color:#0094ff; font-weight:bold; display:block">
-                               @category.CategoryName
-                            </span>
-                          
-                        </td>
-                        <td>
-                            <span style="display:block">@category.Description</span>
-                        </td>   
-                        <td class="text-right">
-                            <a class="btn btn-sm btn-default" href="~/Category/Input/@category.CategoryID/">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                        </td>
+                        </th>
+                        <th style="width:50px">#</th>
+                        <th style="width:auto">Name</th>
+                        <th style="width:200px">Description</th>
+                        <th style="width:50px"></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="box-footer clearfix text-center">
-        <ul class="pagination pagination-sm no-margin pull-right">
+                </thead>
+                <tbody>
+                    @foreach (var category in Model.Data)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="categoryIDs" value="@category.CategoryID"/>
+                            </td> 
+                            <td>@(++i)</td>
+                            <td>
+                                <span style="color:#0094ff; font-weight:bold; display:block">
+                                    @category.CategoryName
+                                </span>
 
-            @if (Model.Page > 1)
-            {
-                <li><a href="~/Category?page=@(Model.Page - 1)@Model.SearchValue">&laquo;</a></li>
+                            </td>
+                            <td>
+                                <span style="display:block">@category.Description</span>
+                            </td>
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-default" href="~/Category/Input/@category.CategoryID/">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</form>
+<div class="box-footer clearfix text-center">
+    <ul class="pagination pagination-sm no-margin pull-right">
 
-            }
-            @if (Model.Page > 3)
+        @if (Model.Page > 1)
             {
-                <li><a href="~/Category?page=1(@Model.SearchValue)">1</a></li>
-                <li class="dots"><a href="#">...</a></li>
-            }
-            @if (Model.Page - 2 > 0)
+            <li><a href="~/Category?page=@(Model.Page - 1)@Model.SearchValue">&laquo;</a></li>
+
+        }
+        @if (Model.Page > 3)
             {
-                <li><a href="~/Category?page=@(Model.Page-2)@Model.SearchValue">@(Model.Page - 2)</a></li>
-            }
-            @if (Model.Page - 1 > 0)
+            <li><a href="~/Category?page=1(@Model.SearchValue)">1</a></li>
+                    <li class="dots"><a href="#">...</a></li>
+        }
+        @if (Model.Page - 2 > 0)
             {
-                <li><a href="~/Category?page=@(Model.Page-1)@Model.SearchValue">@(Model.Page - 1)</a></li>
-            }
-            <li class="active"><a href="~/Category?page=@Model.Page@Model.SearchValue">@Model.Page</a></li>
-            @if (Model.Page + 1 < Model.PageCount + 1)
+            <li><a href="~/Category?page=@(Model.Page-2)@Model.SearchValue">@(Model.Page - 2)</a></li>
+        }
+        @if (Model.Page - 1 > 0)
             {
-                <li><a href="~/Category?page=@(Model.Page+1)@Model.SearchValue">@(Model.Page + 1)</a></li>
-            }
-            @if (Model.Page + 2 < Model.PageCount + 1)
+            <li><a href="~/Category?page=@(Model.Page-1)@Model.SearchValue">@(Model.Page - 1)</a></li>
+        }
+        <li class="active"><a href="~/Category?page=@Model.Page@Model.SearchValue">@Model.Page</a></li>
+        @if (Model.Page + 1 < Model.PageCount + 1)
             {
-                <li><a href="~/Category?page=@(Model.Page+2)@Model.SearchValue">@(Model.Page + 2)</a></li>
-            }
-            @if (Model.Page < Model.PageCount - 2)
+            <li><a href="~/Category?page=@(Model.Page+1)@Model.SearchValue">@(Model.Page + 1)</a></li>
+        }
+        @if (Model.Page + 2 < Model.PageCount + 1)
             {
-                <li class="dots"><a href="#">...</a></li>
-                <li><a href="~/Category?page=@Model.PageCount@Model.SearchValue">@Model.PageCount</a></li>
-            }
-            @*@for (int page = 1; page <= model.pagecount; page++)
+            <li><a href="~/Category?page=@(Model.Page+2)@Model.SearchValue">@(Model.Page + 2)</a></li>
+        }
+        @if (Model.Page < Model.PageCount - 2)
+            {
+            <li class="dots"><a href="#">...</a></li>
+                    <li><a href="~/Category?page=@Model.PageCount@Model.SearchValue">@Model.PageCount</a></li>
+        }
+        @*@for (int page = 1; page <= model.pagecount; page++)
             {
 
             if (model.page == page)
@@ -118,11 +120,11 @@
 
 
             }*@
-            @if (Model.Page < Model.PageCount)
+        @if (Model.Page < Model.PageCount)
             {
-                <li><a href="~/Category?page=@(Model.Page + 1)@Model.SearchValue">&raquo;</a></li>
-            }
+            <li><a href="~/Category?page=@(Model.Page + 1)@Model.SearchValue">&raquo;</a></li>
+        }
 
-        </ul>
-    </div>
+    </ul>
 </div>
+    </div>

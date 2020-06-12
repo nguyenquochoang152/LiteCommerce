@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Manage Customer";
     int i = 0;
-   
+
 }
 <div class="box box-primary">
     <div class="box-body">
@@ -18,106 +18,108 @@
         </form>
     </div>
 </div>
-<div class="container-fluid row" style="margin-bottom:10px;">
-    <div class="col-sm-8">
-        There are <b>@Model.RowCount</b> Customers. Page @string.Format("{0}/{1}", Model.Page, Model.PageCount)
-    </div>
-    <div class="col-md-4 text-right">
-        <div class="btn-group">
-            <a href="~/Customer/Input" class="btn btn-sm btn-primary">Add Customer</a>
-            <button type="button" class="btn btn-sm btn-danger">Delete Customer</button>
+<form action="~/Customer/Delete" method="post">
+    <div class="container-fluid row" style="margin-bottom:10px;">
+        <div class="col-sm-8">
+            There are <b>@Model.RowCount</b> Customers. Page @string.Format("{0}/{1}", Model.Page, Model.PageCount)
+        </div>
+        <div class="col-md-4 text-right">
+            <div class="btn-group">
+                <a href="~/Customer/Input" class="btn btn-sm btn-primary">Add Customer</a>
+                <button type="submit" class="btn btn-sm btn-danger">Delete Customer</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="box box-success">
-    <div class="box-body">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th style="width:30px">
-                        <input type="checkbox" />
-                    </th>
-                    <th style="width:50px">#</th>
-                    <th style="width:auto">Name</th>
-                    <th style="width:200px">Address</th>
-                    <th style="width:200px">Contact Info</th>
-                    <th style="width:50px"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var customer in Model.Data)
-                {
+    <div class="box box-success">
+        <div class="box-body">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td>
+                        <th style="width:30px">
                             <input type="checkbox" />
-                        </td>
-                        <td>@(++i)</td>
-                        <td>
-                            <span style="color:#0094ff; font-weight:bold; display:block">
-                                @customer.CompanyName
-
-                            </span>
-                            <span style="color:#646464">
-                                @customer.ContactTitle
-                            </span>
-                            <span style="color:#646464;font-weight:bold">
-                                @customer.ContactName
-                            </span>
-                        </td>
-                        <td>
-                            <span style="display:block">@customer.Address</span>
-                            <span>New Orleans - USA</span>
-                        </td>
-                        <td>
-                            <span style="display:block"><i class="fa fa-phone"></i> @customer.Phone</span>
-                            <span style="display:block"><i class="fa fa-fax"></i> @customer.Fax</span>
-                        </td>
-                        <td class="text-right">
-                            <a class="btn btn-sm btn-default" href="~/Customer/Input/@customer.CustomerID/">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                        </td>
+                        </th>
+                        <th style="width:50px">#</th>
+                        <th style="width:auto">Name</th>
+                        <th style="width:200px">Address</th>
+                        <th style="width:200px">Contact Info</th>
+                        <th style="width:50px"></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="box-footer clearfix text-center">
-        <ul class="pagination pagination-sm no-margin pull-right">
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model.Data)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="customerIDs" value="@customer.CustomerID"/>
+                            </td>
+                            <td>@(++i)</td>
+                            <td>
+                                <span style="color:#0094ff; font-weight:bold; display:block">
+                                    @customer.CompanyName
 
-            @if (Model.Page > 1)
-            {
-                <li><a href="~/Customer?page=@(Model.Page - 1)@Model.SearchValue">&laquo;</a></li>
+                                </span>
+                                <span style="color:#646464">
+                                    @customer.ContactTitle
+                                </span>
+                                <span style="color:#646464;font-weight:bold">
+                                    @customer.ContactName
+                                </span>
+                            </td>
+                            <td>
+                                <span style="display:block">@customer.Address</span>
+                                <span>New Orleans - USA</span>
+                            </td>
+                            <td>
+                                <span style="display:block"><i class="fa fa-phone"></i> @customer.Phone</span>
+                                <span style="display:block"><i class="fa fa-fax"></i> @customer.Fax</span>
+                            </td>
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-default" href="~/Customer/Input/@customer.CustomerID/">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</form>
+<div class="box-footer clearfix text-center">
+    <ul class="pagination pagination-sm no-margin pull-right">
 
-            }
-            @if (Model.Page > 3)
+        @if (Model.Page > 1)
             {
-                <li><a href="~/Customer?page=1(@Model.SearchValue)">1</a></li>
-                <li class="dots"><a href="#">...</a></li>
-            }
-            @if (Model.Page - 2 > 0)
+            <li><a href="~/Customer?page=@(Model.Page - 1)@Model.SearchValue">&laquo;</a></li>
+
+        }
+        @if (Model.Page > 3)
             {
-                <li><a href="~/Customer?page=@(Model.Page-2)@Model.SearchValue">@(Model.Page - 2)</a></li>
-            }
-            @if (Model.Page - 1 > 0)
+            <li><a href="~/Customer?page=1(@Model.SearchValue)">1</a></li>
+                    <li class="dots"><a href="#">...</a></li>
+        }
+        @if (Model.Page - 2 > 0)
             {
-                <li><a href="~/Customer?page=@(Model.Page-1)@Model.SearchValue">@(Model.Page - 1)</a></li>
-            }
-            <li class="active"><a href="~/customer?page=@Model.Page@Model.SearchValue">@Model.Page</a></li>
-            @if (Model.Page + 1 < Model.PageCount + 1)
+            <li><a href="~/Customer?page=@(Model.Page-2)@Model.SearchValue">@(Model.Page - 2)</a></li>
+        }
+        @if (Model.Page - 1 > 0)
             {
-                <li><a href="~/Customer?page=@(Model.Page+1)@Model.SearchValue">@(Model.Page + 1)</a></li>
-            }
-            @if (Model.Page + 2 < Model.PageCount + 1)
+            <li><a href="~/Customer?page=@(Model.Page-1)@Model.SearchValue">@(Model.Page - 1)</a></li>
+        }
+        <li class="active"><a href="~/customer?page=@Model.Page@Model.SearchValue">@Model.Page</a></li>
+        @if (Model.Page + 1 < Model.PageCount + 1)
             {
-                <li><a href="~/Customer?page=@(Model.Page+2)@Model.SearchValue">@(Model.Page + 2)</a></li>
-            }
-            @if (Model.Page < Model.PageCount - 2)
+            <li><a href="~/Customer?page=@(Model.Page+1)@Model.SearchValue">@(Model.Page + 1)</a></li>
+        }
+        @if (Model.Page + 2 < Model.PageCount + 1)
             {
-                <li class="dots"><a href="#">...</a></li>
-                <li><a href="~/Customer?page=@Model.PageCount@Model.SearchValue">@Model.PageCount</a></li>
-            }
-            @*@for (int page = 1; page <= model.pagecount; page++)
+            <li><a href="~/Customer?page=@(Model.Page+2)@Model.SearchValue">@(Model.Page + 2)</a></li>
+        }
+        @if (Model.Page < Model.PageCount - 2)
+            {
+            <li class="dots"><a href="#">...</a></li>
+                    <li><a href="~/Customer?page=@Model.PageCount@Model.SearchValue">@Model.PageCount</a></li>
+        }
+        @*@for (int page = 1; page <= model.pagecount; page++)
             {
 
             if (model.page == page)
@@ -131,11 +133,11 @@
 
 
             }*@
-            @if (Model.Page < Model.PageCount)
+        @if (Model.Page < Model.PageCount)
             {
-                <li><a href="~/Customer?page=@(Model.Page + 1)@Model.SearchValue">&raquo;</a></li>
-            }
+            <li><a href="~/Customer?page=@(Model.Page + 1)@Model.SearchValue">&raquo;</a></li>
+        }
 
-        </ul>
-    </div>
+    </ul>
 </div>
+    </div>

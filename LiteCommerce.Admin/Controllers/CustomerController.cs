@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace LiteCommerce.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = WebUserRoles.MANAGEDATA)]
     public class CustomerController : Controller
     {
         // GET: Customer
@@ -28,17 +28,88 @@ namespace LiteCommerce.Admin.Controllers
             };
             return View(model);
         }
+        
+        [HttpGet]
         public ActionResult Input(string id = "")
         {
+
             if (string.IsNullOrEmpty(id))
             {
-                ViewBag.Title = "Create new Customer";
+              
+                ViewBag.Title = "Create a Customer";
+                Customer newCustomer = new Customer()
+                {
+                    CustomerID = ""
+                };
+                ViewBag.kt = 0;
+                return View(newCustomer);
             }
             else
-            {
+            {   
                 ViewBag.Title = "Edit a Customer";
+                Customer editCustomer = CatalogBLL.GetCustomer(id);
+                if (editCustomer == null)
+                 
+                return RedirectToAction("Index");
+                ViewBag.kt = 1;
+                return View(editCustomer);
             }
-            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Input(Customer model,int kt)
+        {
+            try
+            {
+                //TODO :Kiểm tra tính hợp lệ của dữ liệu nhập vào
+                if (string.IsNullOrEmpty(model.CustomerID))
+                    ModelState.AddModelError("CustomerID", "CompanyName expected");
+                if (string.IsNullOrEmpty(model.CompanyName))
+                    ModelState.AddModelError("CompanyName", "CompanyName expected");
+                if (string.IsNullOrEmpty(model.ContactName))
+                    ModelState.AddModelError("ContactName", "ContactName expected");
+                if (string.IsNullOrEmpty(model.ContactTitle))
+                    ModelState.AddModelError("ContactTitle", "ContactTitle expected");
+                if (string.IsNullOrEmpty(model.Address))
+                    model.Address = "";
+                if (string.IsNullOrEmpty(model.Country))
+                    model.Country = "";
+                if (string.IsNullOrEmpty(model.City))
+                    model.City = "";
+                if (string.IsNullOrEmpty(model.Phone))
+                    model.Phone = "";
+                if (string.IsNullOrEmpty(model.Fax))
+                    model.Fax = "";
+
+                //TODO :Lưu dữ liệu nhập vào
+                if ((Convert.ToInt32(kt)) == 0)
+                {
+                    ViewBag.kt = 0;
+                    CatalogBLL.AddCustomer(model);
+                }
+                else if((Convert.ToInt32(kt)) == 1)
+                {
+                    ViewBag.kt = 1;
+                    CatalogBLL.UpdateCustomer(model);
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message + ":" + ex.StackTrace);
+                return View(model);
+            }
+        }
+        [HttpPost]
+        public ActionResult Delete(string[] customerIDs)
+        {
+            if (customerIDs != null)
+            {
+                CatalogBLL.DeleteCustomers(customerIDs);
+
+            }
+            return RedirectToAction("Index");
+
         }
     }
 }

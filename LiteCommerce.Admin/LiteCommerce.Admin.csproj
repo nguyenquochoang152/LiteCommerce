@@ -149,7 +149,12 @@
     <Compile Include="App_Start\BusinessLayerConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Codes\MD5.cs" />
     <Compile Include="Codes\SelectListHelper.cs" />
+    <Compile Include="Codes\WebUserData.cs" />
+    <Compile Include="Codes\WebUserExtensions.cs" />
+    <Compile Include="Codes\WebUserPrincipal.cs" />
+    <Compile Include="Codes\WebUserRoles.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -163,10 +168,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Attribute\ProductAttributeModel.cs" />
     <Compile Include="Models\CategoryPaginationResult.cs" />
     <Compile Include="Models\CustomerPaginationResult.cs" />
     <Compile Include="Models\EmployeePaginationResult.cs" />
     <Compile Include="Models\PaginationResult.cs" />
+    <Compile Include="Models\Password\EmployeePassword.cs" />
+    <Compile Include="Models\Password\Password.cs" />
+    <Compile Include="Models\ProductPaginationResult.cs" />
     <Compile Include="Models\ShipperPaginationResult.cs" />
     <Compile Include="Models\SupplierPaginationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +187,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\b6.jpg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -6637,7 +6647,9 @@
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Themes\CSS\Style.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -7158,10 +7170,14 @@
     <Content Include="Views\Category\Input.cshtml" />
     <Content Include="Views\Product\Input.cshtml" />
     <Content Include="Views\Employee\Input.cshtml" />
+    <Content Include="Views\Employee\ChangePassword.cshtml" />
+    <Content Include="Views\Product\Attribute.cshtml" />
+    <Content Include="Views\Product\UpdateAttribute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Images\products\" />
+    <Folder Include="Images\Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -13,7 +13,8 @@ namespace LiteCommerce.DataLayers
         int Count(string searchValue);
         Category Get(int CategoryID);
         int Add(Category data);
-        bool Update(Category date);
+        bool Update(Category data);
         int Detele(int[] categoryIDs);
+        List<Category> GetAll();
     }
 }

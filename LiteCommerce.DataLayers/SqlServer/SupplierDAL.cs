@@ -182,6 +182,44 @@ namespace LiteCommerce.DataLayers.SqlServer
             }
             return data;
         }
+
+        public List<SuppliSer> GetAll()
+        {
+            List<SuppliSer> data = new List<SuppliSer>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                //Tạo lệnh thực thi truy vấn dữ liệu
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"SELECT * 
+                        from Suppliers";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    while (dbReader.Read())
+                    {
+                        data.Add(new SuppliSer()
+                        {
+                            SupplierID = Convert.ToInt32(dbReader["SupplierID"]),
+                            ContactName = Convert.ToString(dbReader["ContactName"]),
+                            CompanyName = Convert.ToString(dbReader["CompanyName"]),
+                            ContactTitle = Convert.ToString(dbReader["ContactTitle"]),
+                            Address = Convert.ToString(dbReader["Address"]),
+                            City = Convert.ToString(dbReader["City"]),
+                            Country = Convert.ToString(dbReader["Country"]),
+                            Phone = Convert.ToString(dbReader["Phone"]),
+                            Fax = Convert.ToString(dbReader["Fax"]),
+                            HomePage = Convert.ToString(dbReader["HomePage"])
+                        });
+                    }
+                }
+                connection.Close();
+            }
+            return data;
+        }
+
         /// <summary>
         /// 
         /// </summary>

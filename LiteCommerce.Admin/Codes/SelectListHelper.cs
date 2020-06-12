@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,13 +10,59 @@ namespace LiteCommerce.Admin
 {
     public static class SelectListHelper
     {
-        public static List<SelectListItem> Countries()
+        /// <summary>
+        /// Các quốc gia 
+        /// </summary>
+        /// <returns></returns>
+        public static List<SelectListItem> Countries(bool allSelectAll = true)
         {
-            List<SelectListItem> list = new List<SelectListItem>();
-            list.Add(new SelectListItem() { Value = "USA", Text = "United States"});
-            list.Add(new SelectListItem() { Value = "VN", Text = "Viet nam" });
-            list.Add(new SelectListItem() { Value = "UK", Text = "England" });
-            return list;
+            List<Country> getList = new List<Country>();
+            getList = CountryBLL.getList();
+            List<SelectListItem> List = new List<SelectListItem>();
+            if (allSelectAll)
+            {
+                List.Add(new SelectListItem() { Value = "0", Text = "-- All Countries --" });
+
+            }
+            foreach (var country in getList)
+            {
+                List.Add(new SelectListItem { Value = country.Abbreviation, Text = country.CountryName });
+            }
+            return List;
+        }
+        public static List<SelectListItem> Categories(bool allSelectAll = true)
+        {
+            List<Category> getAll = new List<Category>();
+            getAll = CatalogBLL.GetAllCategories();
+            List<SelectListItem> List = new List<SelectListItem>();
+            if (allSelectAll)
+            {
+                List.Add(new SelectListItem() { Value = "0", Text = "-- All Categories --" });
+
+            }
+            foreach (var category in getAll)
+            {
+                List.Add(new SelectListItem() { Value = category.CategoryID.ToString(), Text = category.CategoryName });
+            }
+            return List;
+
+        }
+        public static List<SelectListItem> Suppliers(bool allSelectAll = true)
+        {
+            List<SuppliSer> getAll = new List<SuppliSer>();
+            getAll = CatalogBLL.GetAllSuppliers();
+            List<SelectListItem> List = new List<SelectListItem>();
+            if (allSelectAll)
+            {
+                List.Add(new SelectListItem() { Value = "0", Text = "-- All Suppliers --" });
+
+            }
+            foreach (var supplier in getAll)
+            {
+                List.Add(new SelectListItem() { Value = supplier.SupplierID.ToString(), Text = supplier.CompanyName });
+            }
+            return List;
+
         }
     }
 }
