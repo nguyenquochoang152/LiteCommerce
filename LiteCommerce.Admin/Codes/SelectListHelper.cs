@@ -17,11 +17,11 @@ namespace LiteCommerce.Admin
         public static List<SelectListItem> Countries(bool allSelectAll = true)
         {
             List<Country> getList = new List<Country>();
-            getList = CountryBLL.getList();
+            getList = CountryBLL.GetList();
             List<SelectListItem> List = new List<SelectListItem>();
             if (allSelectAll)
             {
-                List.Add(new SelectListItem() { Value = "0", Text = "-- All Countries --" });
+                List.Add(new SelectListItem() { Value = "", Text = "-- All Countries --" });
 
             }
             foreach (var country in getList)
@@ -37,7 +37,7 @@ namespace LiteCommerce.Admin
             List<SelectListItem> List = new List<SelectListItem>();
             if (allSelectAll)
             {
-                List.Add(new SelectListItem() { Value = "0", Text = "-- All Categories --" });
+                List.Add(new SelectListItem() { Value = "", Text = "-- All Categories --" });
 
             }
             foreach (var category in getAll)
@@ -54,7 +54,7 @@ namespace LiteCommerce.Admin
             List<SelectListItem> List = new List<SelectListItem>();
             if (allSelectAll)
             {
-                List.Add(new SelectListItem() { Value = "0", Text = "-- All Suppliers --" });
+                List.Add(new SelectListItem() { Value = "", Text = "-- All Suppliers --" });
 
             }
             foreach (var supplier in getAll)

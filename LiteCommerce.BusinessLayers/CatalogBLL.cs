@@ -171,14 +171,18 @@ namespace LiteCommerce.BusinessLayers
         {
             return ProductDB.Update(data);
         }
-        public static List<Customer> ListOfCustomers(int page, int pageSize, string searchValue, out int rowCount)
+        public static List<Customer> ListOfCustomers(int page, int pageSize, string searchValue,String Country ,out int rowCount)
         {
             if (page < 1)
                 page = 1;
             if (pageSize < 0)
                 pageSize = 20;
-            rowCount = CustomerDB.Count(searchValue);
-            return CustomerDB.List(page, pageSize, searchValue);
+            if (Country.Equals("0"))
+            {
+                Country = "";
+            }
+            rowCount = CustomerDB.Count(searchValue, Country);
+            return CustomerDB.List(page, pageSize, searchValue, Country);
         }
         public static Customer GetCustomer(string customerID)
         {

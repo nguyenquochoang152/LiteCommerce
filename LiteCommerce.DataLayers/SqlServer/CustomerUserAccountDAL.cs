@@ -7,7 +7,7 @@ using LiteCommerce.DomainModels;
 
 namespace LiteCommerce.DataLayers.SqlServer
 {
-    public class CustomerUserAccountDAL : IUserAccountDAL
+    public class CustomerUserAccountDAL : UserAccountDAL
     {
         private string connectionString;
         public CustomerUserAccountDAL(string connectionString)
@@ -24,5 +24,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 Photo = "b6.jpg"
             };
         }
+
+    
     }
 }

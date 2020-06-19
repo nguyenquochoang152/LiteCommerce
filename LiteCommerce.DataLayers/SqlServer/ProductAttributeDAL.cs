@@ -100,7 +100,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             }
 
         }
-        public int Delete(int[] AttributeIDs)
+        public int Delete(int[] ProductIDs)
         {
             int countDelete = 0;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -108,18 +108,17 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"DELETE FROM ProductAttributes
-                                            WHERE(AttributeID = @AttributeID)";
+                                            WHERE(ProductID = @ProductID)";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.Add("@AttributeID", SqlDbType.Int);
-                foreach (int AttributeID in AttributeIDs)
-                {
-                    cmd.Parameters["@AttributeID"].Value = AttributeID;
+                cmd.Parameters.Add("@ProductID", SqlDbType.Int);
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                        countDelete += 1;
+                foreach (var product in ProductIDs)
+                {
+                    cmd.Parameters["@ProductID"].Value = product;
+                    countDelete = cmd.ExecuteNonQuery();
                 }
+
                 connection.Close();
             }
             return countDelete;

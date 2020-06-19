@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace LiteCommerce.DataLayers
 {
         
-    public interface IUserAccountDAL
+    public interface UserAccountDAL
     {
         /// <summary>
         ///  kiểm tra username và password có hợp lệ không
@@ -19,5 +19,6 @@ namespace LiteCommerce.DataLayers
         /// <param name="password"></param>
         /// <returns></returns>
         UserAccount Authorize(string userName, string password);
+        
     }
 }

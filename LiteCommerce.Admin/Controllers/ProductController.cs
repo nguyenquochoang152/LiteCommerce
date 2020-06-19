@@ -121,8 +121,6 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ProductAttributeBLL.Delete(ProductIDs);
                 CatalogBLL.DeleteProducts(ProductIDs);
-
-
             }
             return RedirectToAction("Index");
 

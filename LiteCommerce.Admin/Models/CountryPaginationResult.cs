@@ -6,9 +6,8 @@ using System.Web;
 
 namespace LiteCommerce.Admin.Models
 {
-    public class CustomerPaginationResult : PaginationResult
+    public class CountryPaginationResult : PaginationResult
     {
-        public string Country { get; set; }
-        public List<Customer> Data { get; set; }
+        public List<Country> Data { get; set; }
     }
 }

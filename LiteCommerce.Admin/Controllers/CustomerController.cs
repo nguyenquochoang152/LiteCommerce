@@ -13,18 +13,20 @@ namespace LiteCommerce.Admin.Controllers
     {
         // GET: Customer
        
-        public ActionResult Index(int page = 1, string searchValue = "")
+        public ActionResult Index(int page = 1, string searchValue = "", string Country = "")
         {
             int pageSize = 10;
             int rowCount = 0;
-            List<Customer> ListOfCustomer = CatalogBLL.ListOfCustomers(page, pageSize, searchValue, out rowCount);
+            List<Customer> ListOfCustomer = CatalogBLL.ListOfCustomers(page, pageSize, searchValue,Country, out rowCount);
             var model = new Models.CustomerPaginationResult()
             {
                 Page = page,
                 PageSize = pageSize,
                 RowCount = rowCount,
                 SearchValue = searchValue,
-                Data = ListOfCustomer
+                Data = ListOfCustomer,
+                Country = Country
+
             };
             return View(model);
         }

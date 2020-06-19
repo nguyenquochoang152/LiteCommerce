@@ -12,9 +12,9 @@ using System.Web.Mvc;
 namespace LiteCommerce.Admin.Controllers
 {
     [Authorize(Roles = WebUserRoles.MANAGEACCOUNT)]
+
     public class EmployeeController : Controller
     {
-        // GET: Employee
         // GET: Employee
         public ActionResult Index(int page = 1, string searchValue = "")
         {
@@ -70,8 +70,8 @@ namespace LiteCommerce.Admin.Controllers
                     ModelState.AddModelError("BirthDate", "BirthDate expected");
                 if (model.HireDate == DateTime.MinValue)
                     ModelState.AddModelError("HireDate", "HireDate expected");
-                if (model.HireDate.CompareTo(model.BirthDate) < 0)
-                    ModelState.AddModelError("Date", " expected");
+                if (Convert.ToDateTime(model.HireDate).CompareTo(Convert.ToDateTime(model.BirthDate)) <= 0)
+                    ModelState.AddModelError("Date", "Date expected");
                 if (string.IsNullOrEmpty(model.Email))
                     model.Email = "";
                 if (string.IsNullOrEmpty(model.Address))
@@ -153,7 +153,10 @@ namespace LiteCommerce.Admin.Controllers
                 if (string.IsNullOrEmpty(model.nPassword))
                     ModelState.AddModelError("nPassword", "New password expected");
                 if (string.IsNullOrEmpty(model.nlPassword))
-                    ModelState.AddModelError("aPassword", "Password expected");
+                    ModelState.AddModelError("nlPassword", "Password expected");
+                model.password = MD5Helper.EncodeMD5(model.password);
+                model.nPassword = MD5Helper.EncodeMD5(model.nPassword);
+                model.nlPassword = MD5Helper.EncodeMD5(model.nlPassword);
                 EmployeeBLL.ChangePassword(model.Id, model.password, model.nPassword, model.nlPassword);
                 return RedirectToAction("Input/" + model.Id);
             }

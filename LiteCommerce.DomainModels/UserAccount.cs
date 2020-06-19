@@ -10,9 +10,11 @@ namespace LiteCommerce.DomainModels
     /// Lưu thông tin liên quan đến tài khoản đăng nhập hệ thống.
     /// </summary>
     public class UserAccount
-    {   /// <summary>
-    /// ID của tài khoản đăng nhập vào hệ thống
-    /// </summary>
+    { 
+        public int ValueID { get; set; }
+        /// <summary>
+        /// ID của tài khoản đăng nhập vào hệ thống
+        /// </summary>
         public string UserID { get; set; }
         /// <summary>
         /// Tên đầy đủ của user(First Name và Last Name)

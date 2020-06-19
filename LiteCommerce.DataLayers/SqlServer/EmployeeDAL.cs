@@ -82,7 +82,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             return employeeId;
         }
 
-        public bool ChangePassword(int id, string password, string nPassword, string nlPassword)
+        public bool ChangePassword(int id, string password, string nPassword, string aPassword)
         {
             int row = 0;
             using (SqlConnection connection = new SqlConnection(this.connectionString))
@@ -97,7 +97,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@newPassword", nPassword);
-                cmd.Parameters.AddWithValue("@APassword", nlPassword);
+                cmd.Parameters.AddWithValue("@APassword", aPassword);
 
                 row = Convert.ToInt32(cmd.ExecuteNonQuery());
                 connection.Close();
@@ -122,7 +122,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 count = Convert.ToInt32(cmd.ExecuteScalar());
                 connection.Close();
             }
-            return count;   
+            return count;
         }
 
         public int Detele(int[] employeeIDs)
@@ -152,9 +152,9 @@ namespace LiteCommerce.DataLayers.SqlServer
             return countDeleted;
         }
 
-        public Employee Get(int EmployeeID)
+        public Employee Get(int employeeID)
         {
-            Employee data = null;
+            Employee data = new Employee();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -163,7 +163,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.CommandText = @"SELECT * FROM Employees WHERE EmployeeID = @employeeID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@employeeID", EmployeeID);
+                cmd.Parameters.AddWithValue("@employeeID", employeeID);
 
                 using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
@@ -192,7 +192,48 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 connection.Close();
             }
-            return data;    
+            return data;
+        }
+
+        public List<Employee> GetAll()
+        {
+            List<Employee> data = new List<Employee>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"SELECT * FROM Employees ";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    while (dbReader.Read())
+                    {
+                        data.Add(new Employee()
+                        {
+                            EmployeeID = Convert.ToInt32(dbReader["EmployeeID"]),
+                            FirstName = Convert.ToString(dbReader["FirstName"]),
+                            LastName = Convert.ToString(dbReader["LastName"]),
+                            Title = Convert.ToString(dbReader["Title"]),
+                            Address = Convert.ToString(dbReader["Address"]),
+                            City = Convert.ToString(dbReader["City"]),
+                            Country = Convert.ToString(dbReader["Country"]),
+                            Email = Convert.ToString(dbReader["Email"]),
+                            Password = Convert.ToString(dbReader["Password"]),
+                            PhotoPath = Convert.ToString(dbReader["PhotoPath"]),
+                            HomePhone = Convert.ToString(dbReader["HomePhone"]),
+                            Notes = Convert.ToString(dbReader["Notes"]),
+                            BirthDate = Convert.ToDateTime(dbReader["BirthDate"]),
+                            HireDate = Convert.ToDateTime(dbReader["HireDate"])
+
+                        });
+                    }
+                }
+
+                connection.Close();
+            }
+            return data;
         }
 
         public List<Employee> List(int page, int pageSize, string searchValue)

@@ -9,7 +9,7 @@ using System.Data;
 
 namespace LiteCommerce.DataLayers.SqlServer
 {
-    public class EmployeeUserAccountDAL : IUserAccountDAL
+    public class EmployeeUserAccountDAL : UserAccountDAL
     {
         private string connectionString;
         public EmployeeUserAccountDAL(string connectionString)
@@ -35,6 +35,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                     {
                         data = new UserAccount()
                         {
+                            ValueID = Convert.ToInt32(reader["EmployeeID"]),
                             UserID = Convert.ToString(reader["Email"]),
                             FullName = Convert.ToString(reader["LastName"]) + " " + (Convert.ToString(reader["FirstName"])),
                             Photo = Convert.ToString(reader["PhotoPath"]),
@@ -48,6 +49,28 @@ namespace LiteCommerce.DataLayers.SqlServer
 
             }
             return data;
+        }
+        public bool ChangePassword(int email, string password, string nPassword, string nlPassword)
+        {
+            int row = 0;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"update Employees 
+	                        set Password = @newPassword
+	                        where Email = @email and Password = @password and @newPassword = @NlPassword";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@id", email);
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@newPassword", nPassword);
+                cmd.Parameters.AddWithValue("@NlPassword", nlPassword);
+
+                row = Convert.ToInt32(cmd.ExecuteNonQuery());
+                connection.Close();
+            }
+            return row > 0;
         }
     }
 }
