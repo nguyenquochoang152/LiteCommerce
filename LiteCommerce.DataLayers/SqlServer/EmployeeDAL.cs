@@ -39,7 +39,8 @@ namespace LiteCommerce.DataLayers.SqlServer
 	                                          HomePhone,
 	                                          Notes,
 	                                          PhotoPath,
-                                              Password
+                                              Password,
+                                              Roles
                                           )
                                           VALUES
                                           (
@@ -55,7 +56,8 @@ namespace LiteCommerce.DataLayers.SqlServer
 	                                          @HomePhone,
 	                                          @Notes,
 	                                          @PhotoPath,
-                                              @Password
+                                              @Password,
+                                              @Roles
                                           );
                                           SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
@@ -73,6 +75,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@Notes", data.Notes);
                 cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
                 cmd.Parameters.AddWithValue("@Password", data.Password);
+                cmd.Parameters.AddWithValue("@Roles", data.Roles);
 
                 employeeId = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -184,7 +187,8 @@ namespace LiteCommerce.DataLayers.SqlServer
                             HomePhone = Convert.ToString(dbReader["HomePhone"]),
                             Notes = Convert.ToString(dbReader["Notes"]),
                             BirthDate = Convert.ToDateTime(dbReader["BirthDate"]),
-                            HireDate = Convert.ToDateTime(dbReader["HireDate"])
+                            HireDate = Convert.ToDateTime(dbReader["HireDate"]),
+                            Roles = Convert.ToString(dbReader["Roles"])
 
                         };
                     }
@@ -225,7 +229,8 @@ namespace LiteCommerce.DataLayers.SqlServer
                             HomePhone = Convert.ToString(dbReader["HomePhone"]),
                             Notes = Convert.ToString(dbReader["Notes"]),
                             BirthDate = Convert.ToDateTime(dbReader["BirthDate"]),
-                            HireDate = Convert.ToDateTime(dbReader["HireDate"])
+                            HireDate = Convert.ToDateTime(dbReader["HireDate"]),
+                            Roles = Convert.ToString(dbReader["Roles"])
 
                         });
                     }
@@ -279,7 +284,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                             HomePhone = Convert.ToString(reader["HomePhone"]),
                             PhotoPath = Convert.ToString(reader["PhotoPath"]),
                             Notes = Convert.ToString(reader["Notes"]),
-                            Password = Convert.ToString(reader["Password"])
+                            Password = Convert.ToString(reader["Password"]),
+                            Roles = Convert.ToString(reader["Roles"])
+
                         });
                     }
                 }
@@ -312,6 +319,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                                               ,Notes = @Notes
                                               ,PhotoPath = @PhotoPath
                                               ,Password = @Password
+                                              ,Roles = @Roles
                                           WHERE EmployeeID = @EmployeeID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
@@ -329,6 +337,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@Notes", data.Notes);
                 cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
                 cmd.Parameters.AddWithValue("@Password", data.Password);
+                cmd.Parameters.AddWithValue("@Roles", data.Roles);
 
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
 

@@ -19,6 +19,7 @@ namespace LiteCommerce.Admin
             AttributeBLL.Initialize(connectionString);
             ProductAttributeBLL.Initialize(connectionString);
             UserAccountBLL.Initialize(connectionString);
+            OrderBLL.Initialize(connectionString);
         }
     }
 }

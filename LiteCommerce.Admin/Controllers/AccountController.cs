@@ -23,7 +23,7 @@ namespace LiteCommerce.Admin.Controllers
             return View(employeedata);
         }
         [HttpPost]
-        public ActionResult ProfileAccount(Employee model, HttpPostedFileBase PhotoPath, string PhotoPathDraft)
+        public ActionResult ProfileAccount(Employee model, HttpPostedFileBase PhotoPath, string PhotoPathDraft, string staff="", string managedata="",string manageaccount="")
         {
             try
             {
@@ -40,8 +40,8 @@ namespace LiteCommerce.Admin.Controllers
                     ModelState.AddModelError("BirthDate", "BirthDate expected");
                 if (model.HireDate == DateTime.MinValue)
                     ModelState.AddModelError("HireDate", "HireDate expected");
-                if (model.HireDate.CompareTo(model.BirthDate) > 0)
-                    ModelState.AddModelError("Date", " expected");
+                if (Convert.ToDateTime(model.HireDate).CompareTo(Convert.ToDateTime(model.BirthDate)) <= 0)
+                    ModelState.AddModelError("Date", "Date expected");
                 if (string.IsNullOrEmpty(model.Email))
                     model.Email = "";
                 if (string.IsNullOrEmpty(model.Address))
@@ -60,9 +60,48 @@ namespace LiteCommerce.Admin.Controllers
                 if (PhotoPath != null)
                 {
                     string FileName = $"{DateTime.Now.Ticks}{Path.GetExtension(PhotoPath.FileName)}";
-                    string path = Path.Combine(Server.MapPath("~/Images/uploads"), FileName);
+                    string path = Path.Combine(Server.MapPath("~/Images/Uploads"), FileName);
                     PhotoPath.SaveAs(path);
                     model.PhotoPath = FileName;
+                }
+                if (string.IsNullOrEmpty(staff))
+                {
+
+                    if (string.IsNullOrEmpty(manageaccount) && string.IsNullOrEmpty(managedata))
+                    {
+                        model.Roles = "";
+                    }
+                    else if (string.IsNullOrEmpty(managedata))
+                    {
+                        model.Roles = manageaccount;
+                    }
+                    else if (string.IsNullOrEmpty(manageaccount))
+                    {
+                        model.Roles = managedata;
+                    }
+                    else
+                    {
+                        model.Roles = manageaccount + "," + managedata;
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(manageaccount) && string.IsNullOrEmpty(managedata))
+                    {
+                        model.Roles = staff;
+                    }
+                    else if (string.IsNullOrEmpty(managedata))
+                    {
+                        model.Roles = staff + "," + manageaccount;
+                    }
+                    else if (string.IsNullOrEmpty(manageaccount))
+                    {
+                        model.Roles = staff + "," + managedata;
+                    }
+                    else
+                    {
+                        model.Roles = staff + "," + manageaccount + "," + managedata;
+                    }
                 }
                 //TODO :Lưu dữ liệu nhập vào            
                 if (string.IsNullOrEmpty(model.PhotoPath))

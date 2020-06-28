@@ -174,6 +174,7 @@
     <Compile Include="Models\CountryPaginationResult.cs" />
     <Compile Include="Models\CustomerPaginationResult.cs" />
     <Compile Include="Models\EmployeePaginationResult.cs" />
+    <Compile Include="Models\OrderPaginationResult.cs" />
     <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Models\Password\AccountPassword.cs" />
     <Compile Include="Models\Password\EmployeePassword.cs" />
@@ -190,7 +191,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\b6.jpg" />
+    <Content Include="Images\Uploads\637274237399232342.jpg" />
+    <Content Include="Images\Uploads\637288969501071438.jpg" />
+    <Content Include="Images\Uploads\637288986099344151.jpg" />
+    <Content Include="Images\Uploads\b6.jpg" />
+    <Content Include="Images\bugatti_veyron_grand_blue_side_view_103091_1920x1080.jpg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -7183,7 +7188,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\products\" />
-    <Folder Include="Images\Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -22,7 +22,7 @@
 <form action="~/Shipper/Delete" method="post">
     <div class="container-fluid row" style="margin-bottom:10px;">
         <div class="col-sm-8">
-            There are <b>@ViewBag.RowCount</b> Shippers. @string.Format("{0}/{1}", Model.Page, Model.PageCount)
+            There are <b>@Model.RowCount</b> Shippers. @string.Format("{0}/{1}", Model.Page, Model.PageCount)
         </div>
         <div class="col-md-4 text-right">
             <div class="btn-group">

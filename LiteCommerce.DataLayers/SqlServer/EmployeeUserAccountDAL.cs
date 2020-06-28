@@ -62,7 +62,7 @@ namespace LiteCommerce.DataLayers.SqlServer
 	                        where Email = @email and Password = @password and @newPassword = @NlPassword";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@id", email);
+                cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@newPassword", nPassword);
                 cmd.Parameters.AddWithValue("@NlPassword", nlPassword);
